@@ -4,6 +4,7 @@ import time
 import urllib
 import urllib2
 import datetime
+import thread
 import csv
 
 output1 = 0 
