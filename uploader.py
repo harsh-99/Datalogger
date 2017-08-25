@@ -7,11 +7,11 @@ import datetime
 import thread
 import csv
 
-output1 = 0 
-output2 = 0 
-output3 = 0 
-output4 = 0 
-output5 = 0 
+output1 = '0' 
+output2 = '0' 
+output3 = '0' 
+output4 = '0' 
+output5 = '0' 
 
 def callback1(data):
 	global output1
@@ -52,16 +52,18 @@ def url_send() :
 		writer= csv.writer(csvfile , delimeter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		writer.writerow(['time', 'lati', 'longi', 'speed', 'heading', 'gearposition'])
 		while True:
-			url = 'http://shubhagrawal.in/agv_new.php?'
-			rq = ""
-			rq = url + 'lati=' + output1 + '&longi=' + output2 + '&speed=' + output3 + '&heading=' + output4 + '&gearposition=' + output5 + '&brakeposition=' + '0' + '&mode=' + '0'  
-			req = urllib2.Request(rq)
-			response = urllib2.urlopen(req)
-			now=datetime.datetime.now()
-			print response
-			writer.writerow([now.isoformat(), output1, output2, output3, output4, output5])
-			time.sleep(1)
-
+			try:
+				url = 'http://shubhagrawal.in/agv_new.php?'
+				rq = ""
+				rq = url + 'lati=' + output1 + '&longi=' + output2 + '&speed=' + output3 + '&heading=' + output4 + '&gearposition=' + output5 + '&brakeposition=' + '0' + '&mode=' + '0'  
+				req = urllib2.Request(rq)
+				response = urllib2.urlopen(req)
+				now=datetime.datetime.now()
+				print response
+				writer.writerow([now.isoformat(), output1, output2, output3, output4, output5])
+				time.sleep(1)
+			except httplib.BadStatusLine:
+				pass
 if __name__ == '__main__' :
 	thread.start_new_thread( url_send , ())
 	listener()	
