@@ -29,8 +29,7 @@ cap.release()
 out.release()
 cv2.destroyAllWindows()
 
-'''
 url = 'http://shubhagrawal.in/agv_new1.php?'
 files = {'file': open('out.avi', 'rb')}
 r = requests.post(url, files=files)
-'''
+
